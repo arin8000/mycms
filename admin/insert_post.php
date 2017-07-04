@@ -35,7 +35,7 @@
                 <select name="cat">
                     <option value="null">Select a category</option>
                     <?php
-                    require 'includes/databse.php';
+                    require '../admin/includes/database.php';
                     $get_cats = "select * from categories";
                     $run_cats = mysqli_query($link, $get_cats);
 
