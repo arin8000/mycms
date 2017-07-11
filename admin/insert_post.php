@@ -11,7 +11,7 @@
         }
 
     </style>
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<!--    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>-->
     <script>tinymce.init({selector: 'textarea'});</script>
 
 </head>
@@ -102,15 +102,16 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('Please fill all the fileds')</script>";
         exit;
     } else {
+        move_uploaded_file($post_image_tmp, "news_images/$post_images");
+
+        $insert_posts = "INSERT INTO posts (category_id, post_title, post_date, post_author, post_keywords, post_image, post_content) VALUES ('$post_cat', '$post_title', '$post_date', '$post_author', '$post_keywords', '$post_images', '$post_content')";
+
+        $run_posts = mysqli_query($link, $insert_posts);
+
+        echo "<script>alert('Post has been published!')</script>";
+        echo "<script>window.open('insert_post.php','_self')</script>";
     }
-    move_uploaded_file($post_image_tmp, "news_images/$post_images");
 
-    $insert_posts = "INSERT INTO posts (category_id, post_title, post_date, post_author, post_keywords, post_image, post_content) VALUES ('$post_cat', '$post_title', '$post_date', '$post_author', '$post_keywords', '$post_images', '$post_content')";
-
-    $run_posts = mysqli_query($link, $insert_posts);
-
-    echo "<script>alert('Post has been published!')</script>";
-    echo "<script>window.open('insert_post.php','_self')</script>";
 
 }
 

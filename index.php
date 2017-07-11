@@ -40,7 +40,31 @@
     </div>
 
     <div class="post_area">
-        Something goes here
+        <?php
+            $get_posts = "select * from posts order by rand() limit 0,5";
+
+            $run_posts = mysqli_query($link, $get_posts);
+
+            while ($row_posts = mysqli_fetch_array($run_posts)) {
+                $post_id = $row_posts['post_id'];
+                $post_title = $row_posts['post_title'];
+                $post_date = $row_posts['post_date'];
+                $post_author = $row_posts['post_author'];
+                $post_image = $row_posts['post_image'];
+                $post_content = $row_posts['post_content'];
+
+                echo "
+                    <h2>$post_title</h2>
+                    <span>$post_author</span>  <span>$post_date</span>
+                    <img src='admin/news_images/$post_image' width='100' height='100'/>
+                    
+                    <p>$post_content</p>
+                
+                ";
+            }
+
+
+        ?>
 
     </div>
 
